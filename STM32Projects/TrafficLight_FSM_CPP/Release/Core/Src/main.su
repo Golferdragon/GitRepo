@@ -1,0 +1,5 @@
+../Core/Src/main.cpp:197:6:void SystemClock_Config()	136	static,ignoring_inline_asm
+../Core/Src/main.cpp:429:6:void setLights(LightState)	8	static
+../Core/Src/main.cpp:77:5:int main()	72	static,ignoring_inline_asm
+../Core/Src/main.cpp:447:17:void HAL_GPIO_EXTI_Callback(uint16_t)	0	static
+../Core/Src/main.cpp:459:6:void Error_Handler()	0	static,ignoring_inline_asm
