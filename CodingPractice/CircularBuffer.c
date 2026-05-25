@@ -1,7 +1,7 @@
 // author:		Bruce Wheeler
 // file name:	CircularBuffer.c
 // date:		05/22/26 - Framework Creation
-//				05/24/26 - cb_init() coded
+//				05/24/26 - cb_init() coded, verified, completed
 
 // Section 1.3 Coding Problem 1 - Circular Buffer
 // A 16-byte Circular Buffer in C
@@ -46,7 +46,7 @@ int main() {
 	printf("Count\t= %u\n", test.count);
 	
 	printf("\nVerification of cb_init(CircularBuffer *cb) function >>> FINISHED\n\n");
-	
+		
 	return 0;
 }
 
