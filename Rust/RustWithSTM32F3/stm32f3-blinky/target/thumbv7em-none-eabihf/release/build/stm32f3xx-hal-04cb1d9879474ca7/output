@@ -1,2 +1,0 @@
-cargo:rustc-link-search=C:\Users\golfe\rust\stm32f3-blinky\target\thumbv7em-none-eabihf\release\build\stm32f3xx-hal-04cb1d9879474ca7\out
-cargo:rerun-if-changed=build.rs

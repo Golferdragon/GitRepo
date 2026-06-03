@@ -1,0 +1,28 @@
+# Executables and binaries
+*.exe
+*.bin
+*.elf
+*.hex
+*.map
+*.o
+*.obj
+
+# Rust build output
+target/
+
+# STM32 / Eclipse / CubeIDE build output
+Debug/
+Release/
+
+# Logs and temporary files
+*.log
+*.tmp
+
+# OS/editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Optional: STM32CubeIDE workspace metadata
+.metadata/
