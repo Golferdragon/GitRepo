@@ -12,6 +12,7 @@
 
 // needed header files
 #include <stdio.h>
+#include <stddef.h>
 #include <stdint.h>
 
 // defines
@@ -51,17 +52,72 @@ int main() {
 	printf("\nVerification of cb_init(CircularBuffer *cb) function >>> FINISHED <<<\n\n");
 	
 	// cb_is_empty() and cb_is_full() verification
-	printf("\n\nVerification of cb_is_full(CircularBuffer *cp) & cb_is_empty(CircularBuffer *cb) function(s) >>> STARTED <<<\n\n");
+	printf("\nVerification of cb_is_empty(CircularBuffer *cp) & cb_is_full(CircularBuffer *cb) function(s) >>> STARTED <<<\n");
+	
+	printf("\nFirst: TESTING/VERIFICATION with an empty CircularBuffer.\n");											// scenario #1 - empty
+	uint8_t verifyEE = cb_is_empty(&test);	
+	if (verifyEE == 1) {
+		printf("cb_is_empty() \t\t>>> PASSED <<< \tbasic verification: verifyEE = %u | count = %u\n", verifyEE, test.count);
+	}
+	else {
+		printf("cb_is_empty() \t\t>>> NOT PASSED <<< \tbasic verification: verifyEE = %u | count = %u\n", verifyEE, test.count);
+	}
+	uint8_t verifyFE = cb_is_full(&test);
+	if (verifyFE == 0) {
+		printf("cb_is_full() \t\t>>> PASSED <<< \tbasic verification: verifyFE = %u | count = %u\n", verifyFE, test.count);
+	}
+	else {
+		printf("cb_is_full() \t\t>>> NOT PASSED <<< \tbasic verification: verifyFE = %u | count = %u\n", verifyFE, test.count);
+	}
+	
+	printf("\nSecond: TESTING/VERIFICATION with a full CircularBuffer.\n");												// scenario #2 - full
+	test.count = 16;
+	uint8_t verifyEF = cb_is_empty(&test);	
+	if (verifyEF == 0) {
+		printf("cb_is_empty() \t\t>>> PASSED <<< \tbasic verification: verifyEF = %u | count = %u\n", verifyEF, test.count);
+	}
+	else {
+		printf("cb_is_empty() \t\t>>> NOT PASSED <<< \tbasic verification: verifyEF = %u | count = %u\n", verifyEF, test.count);
+	}
+	uint8_t verifyFF = cb_is_full(&test);
+	if (verifyFF == 1) {
+		printf("cb_is_full() \t\t>>> PASSED <<< \tbasic verification: verifyFF = %u | count = %u\n", verifyFF, test.count);
+	}
+	else {
+		printf("cb_is_full() \t\t>>> NOT PASSED <<< \tbasic verification: verifyFF = %u | count = %u\n", verifyFF, test.count);
+	}
+	
+	printf("\nThird: TESTING/VERIFICATION with a partially filled CircularBuffer - neither full nor empty.\n");			// scenario #3 - partially filled
+	test.count = 7;
+	uint8_t verifyEP = cb_is_empty(&test);	
+	if (verifyEP == 0) {
+		printf("cb_is_empty() \t\t>>> PASSED <<< \tbasic verification: verifyEP = %u | count = %u\n", verifyEP, test.count);
+	}
+	else {
+		printf("cb_is_empty() \t\t>>> NOT PASSED <<< \tbasic verification: verifyEP = %u | count = %u\n", verifyEP, test.count);
+	}
+	uint8_t verifyFP = cb_is_full(&test);
+	if (verifyFP == 0) {
+		printf("cb_is_full() \t\t>>> PASSED <<< \tbasic verification: verifyFP = %u | count = %u\n", verifyFP, test.count);
+	}
+	else {
+		printf("cb_is_full() \t\t>>> NOT PASSED <<< \tbasic verification: verifyFP = %u | count = %u\n", verifyFP, test.count);
+	}	
+	
+	printf("\nVerification of cb_is_empty(CircularBuffer *cp) & cb_is_full(CircularBuffer *cb) function(s) >>> FINISHED <<<\n\n");
+	
+	// cb_push() testing & verification
 	
 	
+	// cb_pop() testing & verification
 	
-	printf("\n\nVerification of cb_is_full(CircularBuffer *cp) & cb_is_empty(CircularBuffer *cb) function(s) >>> FINISHED <<<\n\n");
+	
 	return 0;
 }
 
 // function definitions
 void cb_init(CircularBuffer *cb){
-	if (cb == NULL) {
+	if (cb == NULL) {								// avoid a NULL pointer issue
 		return;
 	}	
 	
@@ -76,10 +132,19 @@ void cb_init(CircularBuffer *cb){
 
 int cb_push(CircularBuffer *cb, uint8_t value){
 	// check if buffer is full, if full return -1
-	// write value to data[head]
-	// advance head - watch out for the wrap around: on wrap around head == 0
-	// increment count
-	return -1;
+	//if (cb == NULL) {								// safety : avoid a NULL pointer issue
+	//	return -2;
+	//}
+	//elif (cb_is_full(cb)) {						// avoid buffer overflow - program requirement for return value
+	//	return -1;
+	//}
+	//else {										// can add to CircularBuffer
+	//	write value to data[head]
+	//	advance head - watch out for the wrap around: on wrap around head == 0
+	//	increment count
+	//	return 0;
+	//}
+	return 0;
 }
 
 int cb_pop(CircularBuffer *cb, uint8_t *value){
@@ -87,21 +152,21 @@ int cb_pop(CircularBuffer *cb, uint8_t *value){
 	// read value from data[tail]
 	// advance tail - watch out for the wrap around
 	// decrement count
-	return -1;
+	return 0;
 }
 
 int cb_is_empty(CircularBuffer *cb){
-	if (cb == NULL) {								//
+	if (cb == NULL) {								// safety : avoid NULL pointer issues
 		return -1;
 	}
 	
-	return cb->count == 0;							//
+	return cb->count == 0;							// returns 1 if true (EMPTY), 0 if false (NOT EMPTY)
 }
 
 int cb_is_full(CircularBuffer *cb){
-	if (cb == NULL) {								//
+	if (cb == NULL) {								// safety : avoid NULL pointer issues
 		return -1;
 	}
 	
-	return cb->count == BUFFER_SIZE;				//
+	return cb->count == BUFFER_SIZE;				// returns 1 if true (FULL), 0 if false (NOT FULL)
 }
