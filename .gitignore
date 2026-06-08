@@ -26,3 +26,11 @@ Thumbs.db
 
 # Optional: STM32CubeIDE workspace metadata
 .metadata/
+
+# Work-in-progress embedded projects
+# Keep the folder locally, but do not publish project contents.
+STM32Projects/WorkInProgress/*
+
+# Allow a placeholder and README so the directory still appears in GitHub.
+!STM32Projects/WorkInProgress/.gitkeep
+!STM32Projects/WorkInProgress/README.md
